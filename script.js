@@ -82,7 +82,95 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3. Scrollspy Navigation Indicator ---
+    // --- 3. Mobile Navigation Drawer Toggle ---
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileDrawerBackdrop = document.getElementById('mobileDrawerBackdrop');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+        if (!mobileMenuBtn || !mobileDrawer) return;
+        mobileMenuBtn.classList.add('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileDrawer.classList.add('active');
+        mobileDrawer.setAttribute('aria-hidden', 'false');
+        if (mobileDrawerBackdrop) {
+            mobileDrawerBackdrop.classList.add('active');
+            mobileDrawerBackdrop.setAttribute('aria-hidden', 'false');
+        }
+        document.body.classList.add('menu-open');
+    }
+
+    function closeMobileMenu() {
+        if (!mobileMenuBtn || !mobileDrawer) return;
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileDrawer.classList.remove('active');
+        mobileDrawer.setAttribute('aria-hidden', 'true');
+        if (mobileDrawerBackdrop) {
+            mobileDrawerBackdrop.classList.remove('active');
+            mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+        }
+        document.body.classList.remove('menu-open');
+    }
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = mobileMenuBtn.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+    }
+
+    if (mobileDrawerBackdrop) {
+        mobileDrawerBackdrop.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close mobile menu when clicking any nav link inside it
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+
+    // Also close mobile drawer on contact button inside drawer
+    const mobileContactBtn = document.querySelector('.mobile-contact-btn');
+    if (mobileContactBtn) {
+        mobileContactBtn.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMobileMenu();
+        }
+    });
+
+    // --- 4. Floating Back to Top Button ---
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 350) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // --- 5. Scrollspy Navigation Indicator (Desktop & Mobile) ---
     const sections = document.querySelectorAll('section[id]');
     const navPills = document.querySelectorAll('.nav-pill');
 
@@ -95,10 +183,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionId = section.getAttribute('id');
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                // Update Desktop pills
                 navPills.forEach(pill => {
                     pill.classList.remove('active');
                     if (pill.getAttribute('href') === `#${sectionId}`) {
                         pill.classList.add('active');
+                    }
+                });
+
+                // Update Mobile drawer links
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
                     }
                 });
             }
