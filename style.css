@@ -637,6 +637,10 @@ body.menu-open {
     pointer-events: none;
 }
 
+.hero-avatar-picture {
+    display: contents;
+}
+
 .hero-avatar {
     position: relative;
     z-index: 2;
