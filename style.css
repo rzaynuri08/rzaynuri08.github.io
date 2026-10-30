@@ -719,10 +719,14 @@ body.menu-open {
 .project-thumb-box {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9.5;
+    aspect-ratio: 16 / 9;
     background: #09090c;
     overflow: hidden;
     border-bottom: 1px solid var(--border-subtle);
+}
+
+.project-thumb-picture {
+    display: contents;
 }
 
 .project-thumb {
