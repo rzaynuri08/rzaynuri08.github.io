@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail — Reyhan Zaynuri</title>
+    <meta name="description" content="Project detail and screenshot gallery — Reyhan Zaynuri Software Engineer Portfolio.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* === Project Detail Page Styles === */
+
+        .project-detail-page {
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+            margin-bottom: 40px;
+        }
+
+        .back-nav:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hover);
+        }
+
+        .back-nav svg {
+            transition: transform 0.2s ease;
+        }
+
+        .back-nav:hover svg {
+            transform: translateX(-3px);
+        }
+
+        /* Project Hero Header */
+        .project-hero {
+            margin-bottom: 52px;
+        }
+
+        .project-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-purple-glow);
+            color: var(--accent-purple);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .project-hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .project-hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            max-width: 700px;
+        }
+
+        /* Tech Stack Pills */
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .project-tech-stack .tag {
+            font-size: 0.82rem;
+            padding: 7px 16px;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin-top: 20px;
+        }
+
+        .gallery-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .gallery-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-subtle);
+        }
+
+        /* Masonry-style gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(99, 102, 241, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay svg {
+            color: white;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Project Info Cards */
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 36px;
+            margin-bottom: 48px;
+        }
+
+        .project-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+
+        .project-info-card .info-label {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .project-info-card .info-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            z-index: 1;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        .lightbox-prev {
+            left: -60px;
+        }
+
+        .lightbox-next {
+            right: -60px;
+        }
+
+        .lightbox-counter {
+            text-align: center;
+            margin-top: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Empty state */
+        .gallery-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .gallery-empty svg {
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail-page {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-nav {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Ambient Background Glows -->
+    <div class="ambient-glow glow-top" aria-hidden="true"></div>
+    <div class="ambient-glow glow-middle" aria-hidden="true"></div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html#about" class="brand">
+                <span class="brand-name">Reyhan Zaynuri</span>
+            </a>
+            <nav class="nav-pills" role="navigation">
+                <a href="index.html#about" class="nav-pill">About</a>
+                <a href="index.html#projects" class="nav-pill active">Projects</a>
+                <a href="index.html#experience" class="nav-pill">Experience</a>
+                <a href="index.html#certifications" class="nav-pill">Licenses & Certifications</a>
+            </nav>
+            <a href="index.html#contact" class="btn btn-primary-glow btn-contact-desktop">
+                <span>Get In Touch</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="project-detail-page">
+        <div class="container">
+            <!-- Back Navigation -->
+            <a href="index.html#projects" class="back-nav" id="backNav">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to Projects</span>
+            </a>
+
+            <!-- Project Hero -->
+            <div class="project-hero" id="projectHero">
+                <span class="project-hero-badge" id="projectCategory">PROJECT</span>
+                <h1 class="project-hero-title" id="projectTitle">Loading...</h1>
+                <p class="project-hero-desc" id="projectDesc"></p>
+                <div class="project-tech-stack" id="projectTags"></div>
+            </div>
+
+            <!-- Project Info Cards -->
+            <div class="project-info-grid" id="projectInfoGrid"></div>
+
+            <!-- Gallery -->
+            <div class="gallery-section">
+                <div class="gallery-label">
+                    <span>Screenshots & Gallery</span>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img src="" alt="" id="lightboxImage">
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // ====================================================================
+        // Project Data Registry
+        // ====================================================================
+        const PROJECTS = {
+            1: {
+                title: 'DESKCASH',
+                category: 'Desktop / Backend',
+                desc: 'A Java-based application developed to streamline the management of raw materials and transactions in a café. Facilitates inventory tracking, order processing, and financial record-keeping to minimize errors and optimize café productivity.',
+                tags: ['Java', 'MySQL', 'Desktop App'],
+                info: [
+                    { label: 'Platform', value: 'Desktop' },
+                    { label: 'Language', value: 'Java' },
+                    { label: 'Database', value: 'MySQL' },
+                    { label: 'Type', value: 'POS System' }
+                ],
+                images: [
+                    { webp: 'assets/app1/1741325775048.webp', fallback: 'assets/app1/1741325775048.jpeg', alt: 'DESKCASH — Main Dashboard' },
+                    { webp: 'assets/app1/1741326310854.webp', fallback: 'assets/app1/1741326310854.jpeg', alt: 'DESKCASH — Transaction View' },
+                    { webp: 'assets/app1/1741326540201.webp', fallback: 'assets/app1/1741326540201.jpeg', alt: 'DESKCASH — Inventory Management' }
+                ]
+            },
+            2: {
+                title: 'Coding Camp',
+                category: 'Mobile',
+                desc: 'A mobile-based learning platform developed using Kotlin, designed to provide structured IT learning modules for users of all levels with a user-friendly interface for an engaging learning experience.',
+                tags: ['Kotlin', 'REST API', 'Android'],
+                info: [
+                    { label: 'Platform', value: 'Android' },
+                    { label: 'Language', value: 'Kotlin' },
+                    { label: 'Architecture', value: 'MVVM' },
+                    { label: 'Type', value: 'E-Learning' }
+                ],
+                images: [
+                    { webp: 'assets/app2/Screenshot_2025-03-08-12-24-49-491_com.cc.codingcamp.webp', fallback: 'assets/app2/Screenshot_2025-03-08-12-24-49-491_com.cc.codingcamp.jpg', alt: 'Coding Camp — Home Screen' },
+                    { webp: 'assets/app2/Screenshot_2025-03-08-12-24-53-709_com.cc.codingcamp.webp', fallback: 'assets/app2/Screenshot_2025-03-08-12-24-53-709_com.cc.codingcamp.jpg', alt: 'Coding Camp — Module List' },
+                    { webp: 'assets/app2/Screenshot_2025-03-08-13-08-29-680_com.cc.codingcamp.webp', fallback: 'assets/app2/Screenshot_2025-03-08-13-08-29-680_com.cc.codingcamp.jpg', alt: 'Coding Camp — Lesson View' },
+                    { webp: 'assets/app2/Screenshot_2025-03-08-13-08-36-363_com.cc.codingcamp.webp', fallback: 'assets/app2/Screenshot_2025-03-08-13-08-36-363_com.cc.codingcamp.jpg', alt: 'Coding Camp — Profile' }
+                ]
+            },
+            3: {
+                title: 'Mobilink',
+                category: 'Mobile',
+                desc: 'A mobile-based car rental application designed to modernize and simplify vehicle booking. Offers a seamless platform for users to browse, reserve, and manage car rentals directly from their smartphones.',
+                tags: ['Flutter', 'Dart', 'Cross-Platform'],
+                info: [
+                    { label: 'Platform', value: 'Cross-Platform' },
+                    { label: 'Framework', value: 'Flutter' },
+                    { label: 'Language', value: 'Dart' },
+                    { label: 'Type', value: 'Car Rental' }
+                ],
+                images: [
+                    { webp: 'assets/app3/Screenshot_2024-06-27-13-13-43-992_com.example.mobilink_v2.webp', fallback: 'assets/app3/Screenshot_2024-06-27-13-13-43-992_com.example.mobilink_v2.jpg', alt: 'Mobilink — Home Screen' },
+                    { webp: 'assets/app3/Screenshot_2024-06-27-13-14-16-755_com.example.mobilink_v2.webp', fallback: 'assets/app3/Screenshot_2024-06-27-13-14-16-755_com.example.mobilink_v2.jpg', alt: 'Mobilink — Car Listing' },
+                    { webp: 'assets/app3/Screenshot_2024-06-27-13-14-27-436_com.example.mobilink_v2.webp', fallback: 'assets/app3/Screenshot_2024-06-27-13-14-27-436_com.example.mobilink_v2.jpg', alt: 'Mobilink — Booking Detail' },
+                    { webp: 'assets/app3/Screenshot_2024-06-27-13-16-26-995_com.example.mobilink_v2.webp', fallback: 'assets/app3/Screenshot_2024-06-27-13-16-26-995_com.example.mobilink_v2.jpg', alt: 'Mobilink — Reservation' },
+                    { webp: 'assets/app3/Screenshot_2024-06-27-13-16-29-935_com.example.mobilink_v2.webp', fallback: 'assets/app3/Screenshot_2024-06-27-13-16-29-935_com.example.mobilink_v2.jpg', alt: 'Mobilink — Profile' }
+                ]
+            },
+            4: {
+                title: 'Easter Picture Adventure',
+                category: 'Mobile',
+                desc: 'Designed and developed a mobile picture-based crossword puzzle game tailored for children, featuring an engaging interface and an integrated scoring system to encourage learning through fun and interactive play.',
+                tags: ['Kotlin', 'SQLite', 'Mobile Game'],
+                info: [
+                    { label: 'Platform', value: 'Android' },
+                    { label: 'Language', value: 'Kotlin' },
+                    { label: 'Database', value: 'SQLite' },
+                    { label: 'Type', value: 'Educational Game' }
+                ],
+                images: [
+                    { webp: 'assets/app4/easteregg.webp', fallback: 'assets/app4/easteregg.png', alt: 'Easter Picture Adventure — Game Screen' }
+                ]
+            },
+            5: {
+                title: 'Larvae Classification With MultiView CNN',
+                category: 'AI / ML',
+                desc: 'Deep learning-based image classification model to automatically identify mosquito larvae species from microscopic images. Classifies three medically important mosquito genera—Aedes, Anopheles, and Culex—for rapid vector surveillance.',
+                tags: ['PyTorch', 'CNN', 'MobileFusionNet'],
+                info: [
+                    { label: 'Framework', value: 'PyTorch' },
+                    { label: 'Model', value: 'MobileFusionNet' },
+                    { label: 'Task', value: 'Classification' },
+                    { label: 'Classes', value: '3 Genera' }
+                ],
+                images: [
+                    { webp: 'assets/app5/1784559234186.webp', fallback: 'assets/app5/1784559234186.jpeg', alt: 'Larvae Classification — Model Overview' },
+                    { webp: 'assets/app5/1784559233674.webp', fallback: 'assets/app5/1784559233674.jpeg', alt: 'Larvae Classification — Training Results' },
+                    { webp: 'assets/app5/1784559234043.webp', fallback: 'assets/app5/1784559234043.jpeg', alt: 'Larvae Classification — Confusion Matrix' },
+                    { webp: 'assets/app5/1784559234206.webp', fallback: 'assets/app5/1784559234206.jpeg', alt: 'Larvae Classification — Sample Predictions' },
+                    { webp: 'assets/app5/1784559234252.webp', fallback: 'assets/app5/1784559234252.jpeg', alt: 'Larvae Classification — Architecture Diagram' }
+                ]
+            }
+        };
+
+        // ====================================================================
+        // Page Initialization
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const projectId = parseInt(params.get('id'));
+            const project = PROJECTS[projectId];
+
+            if (!project) {
+                document.getElementById('projectTitle').textContent = 'Project Not Found';
+                document.getElementById('projectDesc').textContent = 'The requested project could not be found.';
+                return;
+            }
+
+            // Update page title
+            document.title = `${project.title} — Reyhan Zaynuri`;
+
+            // Populate Hero
+            document.getElementById('projectCategory').textContent = project.category;
+            document.getElementById('projectTitle').textContent = project.title;
+            document.getElementById('projectDesc').textContent = project.desc;
+
+            // Tags
+            const tagsContainer = document.getElementById('projectTags');
+            project.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'tag';
+                span.textContent = tag;
+                tagsContainer.appendChild(span);
+            });
+
+            // Info Cards
+            const infoGrid = document.getElementById('projectInfoGrid');
+            project.info.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'project-info-card';
+                card.innerHTML = `
+                    <div class="info-label">${item.label}</div>
+                    <div class="info-value">${item.value}</div>
+                `;
+                infoGrid.appendChild(card);
+            });
+
+            // Gallery
+            const galleryGrid = document.getElementById('galleryGrid');
+            if (project.images.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div class="gallery-empty">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p>No screenshots available for this project yet.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            project.images.forEach((img, idx) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.setAttribute('data-index', idx);
+                item.innerHTML = `
+                    <picture>
+                        <source srcset="${img.webp}" type="image/webp">
+                        <img src="${img.fallback}" alt="${img.alt}" loading="lazy">
+                    </picture>
+                    <div class="gallery-item-overlay">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="11" y1="8" x2="11" y2="14"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                    </div>
+                `;
+                galleryGrid.appendChild(item);
+            });
+
+            // ================================================================
+            // Lightbox
+            // ================================================================
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            let currentIndex = 0;
+            const images = project.images;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                updateLightboxImage();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function updateLightboxImage() {
+                const img = images[currentIndex];
+                lightboxImage.src = img.webp || img.fallback;
+                lightboxImage.alt = img.alt;
+                lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateLightboxImage();
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateLightboxImage();
+            }
+
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    openLightbox(parseInt(item.getAttribute('data-index')));
+                });
+            });
+
+            document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+            document.getElementById('lightboxBackdrop').addEventListener('click', closeLightbox);
+            document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+            document.getElementById('lightboxNext').addEventListener('click', nextImage);
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+            });
+        });
+    </script>
+</body>
+
+</html>
