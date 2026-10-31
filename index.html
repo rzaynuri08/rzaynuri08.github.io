@@ -477,8 +477,10 @@
                             <span class="tag">Frontend & Backend</span>
                             <span class="tag">REST API</span>
                         </div>
-                        <a href="https://bnsp.go.id" target="_blank" rel="noopener noreferrer"
-                            class="btn btn-secondary-card">
+                        <a href="assets/sertifikat-ujikom-web.webp" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-secondary-card cert-modal-trigger"
+                            data-cert-title="Sertifikat Pengembang Web - BNSP"
+                            data-cert-img="assets/sertifikat-ujikom-web.webp">
                             <span>Show Credential</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -782,6 +784,34 @@
             <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
         <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- Certificate Preview Modal -->
+    <div class="cert-modal" id="certModal" aria-hidden="true" role="dialog" aria-labelledby="certModalTitle">
+        <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+        <div class="cert-modal-dialog">
+            <div class="cert-modal-header">
+                <h3 class="cert-modal-title" id="certModalTitle">Certificate Preview</h3>
+                <div class="cert-modal-actions">
+                    <a href="#" id="certModalOpenNewTab" target="_blank" rel="noopener noreferrer" class="cert-modal-btn" title="Open full image in new tab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                    <button class="cert-modal-btn cert-modal-close" id="certModalCloseBtn" aria-label="Close modal">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="cert-modal-body">
+                <img src="" alt="Certificate" id="certModalImage" class="cert-modal-img">
+            </div>
+        </div>
     </div>
 
     <!-- Interactive Script -->

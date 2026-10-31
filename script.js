@@ -203,4 +203,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', highlightNavOnScroll, { passive: true });
+
+    // --- 6. Certificate Preview Modal ---
+    const certModal = document.getElementById('certModal');
+    const certModalBackdrop = document.getElementById('certModalBackdrop');
+    const certModalCloseBtn = document.getElementById('certModalCloseBtn');
+    const certModalImage = document.getElementById('certModalImage');
+    const certModalTitle = document.getElementById('certModalTitle');
+    const certModalOpenNewTab = document.getElementById('certModalOpenNewTab');
+    const certModalTriggers = document.querySelectorAll('.cert-modal-trigger');
+
+    function openCertModal(imgSrc, title) {
+        if (!certModal || !certModalImage) return;
+        certModalImage.src = imgSrc;
+        certModalImage.alt = title || 'Certificate';
+        if (certModalTitle) certModalTitle.textContent = title || 'Certificate Preview';
+        if (certModalOpenNewTab) certModalOpenNewTab.href = imgSrc;
+
+        certModal.classList.add('active');
+        certModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertModal() {
+        if (!certModal) return;
+        certModal.classList.remove('active');
+        certModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    certModalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const imgSrc = trigger.getAttribute('data-cert-img') || trigger.getAttribute('href');
+            const title = trigger.getAttribute('data-cert-title');
+            openCertModal(imgSrc, title);
+        });
+    });
+
+    if (certModalCloseBtn) {
+        certModalCloseBtn.addEventListener('click', closeCertModal);
+    }
+    if (certModalBackdrop) {
+        certModalBackdrop.addEventListener('click', closeCertModal);
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && certModal && certModal.classList.contains('active')) {
+            closeCertModal();
+        }
+    });
 });
