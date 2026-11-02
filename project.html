@@ -391,20 +391,100 @@
         <div class="nav-container">
             <a href="index.html#about" class="brand">
                 <span class="brand-name">Reyhan Zaynuri</span>
+                <span class="badge status-badge header-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Available for hire</span>
+                </span>
             </a>
-            <nav class="nav-pills" role="navigation">
+
+            <nav class="nav-pills" id="navPills">
                 <a href="index.html#about" class="nav-pill">About</a>
                 <a href="index.html#projects" class="nav-pill active">Projects</a>
                 <a href="index.html#experience" class="nav-pill">Experience</a>
                 <a href="index.html#certifications" class="nav-pill">Licenses & Certifications</a>
             </nav>
-            <a href="index.html#contact" class="btn btn-primary-glow btn-contact-desktop">
-                <span>Get In Touch</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-            </a>
+
+            <div class="nav-action">
+                <a href="index.html#contact" class="btn btn-outline-sm btn-contact-desktop">Get In Touch</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu"
+                    aria-expanded="false" aria-controls="mobileDrawer">
+                    <span class="hamburger-box">
+                        <span class="hamburger-line line-1"></span>
+                        <span class="hamburger-line line-2"></span>
+                        <span class="hamburger-line line-3"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" aria-hidden="true"></div>
+        <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+            <div class="mobile-drawer-inner">
+                <div class="mobile-drawer-header">
+                    <span class="badge status-badge">
+                        <span class="status-dot"></span>
+                        Available for hire
+                    </span>
+                </div>
+                <nav class="mobile-nav-links">
+                    <a href="index.html#about" class="mobile-nav-link">
+                        <span class="mobile-nav-num">00</span>
+                        <span class="mobile-nav-title">About</span>
+                    </a>
+                    <a href="index.html#projects" class="mobile-nav-link active">
+                        <span class="mobile-nav-num">01</span>
+                        <span class="mobile-nav-title">Projects</span>
+                    </a>
+                    <a href="index.html#experience" class="mobile-nav-link">
+                        <span class="mobile-nav-num">02</span>
+                        <span class="mobile-nav-title">Experience</span>
+                    </a>
+                    <a href="index.html#certifications" class="mobile-nav-link">
+                        <span class="mobile-nav-num">03</span>
+                        <span class="mobile-nav-title">Licenses & Certifications</span>
+                    </a>
+                </nav>
+                <div class="mobile-drawer-footer">
+                    <a href="index.html#contact" class="btn btn-primary-glow mobile-contact-btn">
+                        <span>Get In Touch</span>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                    <div class="mobile-drawer-socials">
+                        <a href="https://github.com/rzaynuri08" target="_blank" rel="noopener noreferrer"
+                            class="social-btn" aria-label="GitHub Profile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/reyhan-zaynuri-2b352321a/" target="_blank"
+                            rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn Profile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="mailto:reyhanzaynuri3@gmail.com" class="social-btn" aria-label="Email Me">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -557,6 +637,30 @@
                     { webp: 'assets/app5/1784559234206.webp', fallback: 'assets/app5/1784559234206.jpeg', alt: 'Larvae Classification — Sample Predictions' },
                     { webp: 'assets/app5/1784559234252.webp', fallback: 'assets/app5/1784559234252.jpeg', alt: 'Larvae Classification — Architecture Diagram' }
                 ]
+            },
+            6: {
+                title: 'Medicare',
+                category: 'Desktop / Backend',
+                desc: 'A comprehensive web-based pharmacy and healthcare e-commerce management system. Built with Laravel and MySQL, Medicare provides an intuitive storefront for customers to browse medicines, add items to cart, and checkout, coupled with an admin dashboard featuring real-time sales metrics, medicine inventory and expiry tracking, supplier records, and discount management.',
+                tags: ['Laravel', 'MySQL', 'Web App', 'PHP'],
+                info: [
+                    { label: 'Platform', value: 'Web Application' },
+                    { label: 'Framework', value: 'Laravel / PHP' },
+                    { label: 'Database', value: 'MySQL' },
+                    { label: 'Type', value: 'Pharmacy & E-Commerce' }
+                ],
+                images: [
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114012.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114012.png', alt: 'Medicare — Homepage & Hero Section' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114250.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114250.png', alt: 'Medicare — Products Catalog & Shopping Cart' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114330.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114330.png', alt: 'Medicare — Order Checkout & Voucher Discount' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114545.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114545.png', alt: 'Medicare — Transaction History & Status' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114758.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114758.png', alt: 'Medicare — Admin Dashboard & Sales Analytics' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 114942.webp', fallback: 'assets/app6/Screenshot 2026-02-15 114942.png', alt: 'Medicare — Medicine Inventory Management' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 115143.webp', fallback: 'assets/app6/Screenshot 2026-02-15 115143.png', alt: 'Medicare — Supplier Directory Management' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 115200.webp', fallback: 'assets/app6/Screenshot 2026-02-15 115200.png', alt: 'Medicare — Promo & Discount Management' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 115229.webp', fallback: 'assets/app6/Screenshot 2026-02-15 115229.png', alt: 'Medicare — Stock Purchase & Expiry Control' },
+                    { webp: 'assets/app6/Screenshot 2026-02-15 094303.webp', fallback: 'assets/app6/Screenshot 2026-02-15 094303.png', alt: 'Medicare — Database Schema / ERD' }
+                ]
             }
         };
 
@@ -697,6 +801,7 @@
             });
         });
     </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
